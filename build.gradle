@@ -34,6 +34,7 @@ println "Ratpack FOAAS - By: ${authors.join(', ')}"
 dependencies {
     springloaded "org.springsource.springloaded:springloaded-core:1.1.1"
     compile "com.itextpdf:itextpdf:5.4.2"
+    runtime 'org.bouncycastle:bcprov-jdk15on:1.49'
 }
 
 apply plugin: "idea"
