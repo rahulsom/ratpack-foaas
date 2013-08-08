@@ -15,9 +15,9 @@ class FuckOffRenderer extends ByTypeRenderer<FuckOff> {
     @Override
     void render(Context ctx, FuckOff f) {
         ctx.given {
-            text { "send boring" "$f.message $f.subtitle" }
-            html { "send html" groovyTemplate("fuckoff.html", f: f) }
-            json { "send json" toJson(f) }
+            text { "send boring" f }
+            html { "send html" f }
+            json { "send json" f }
             pdf  { "send pdf" f }
         }
     }

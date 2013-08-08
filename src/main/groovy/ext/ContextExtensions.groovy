@@ -6,6 +6,8 @@ import org.ratpackframework.groovy.Template
 import org.ratpackframework.handling.ByAcceptsResponder
 import org.ratpackframework.handling.Context
 
+import static groovy.json.JsonOutput.toJson
+import static org.ratpackframework.groovy.Template.groovyTemplate
 import static org.ratpackframework.groovy.Util.with
 /**
  * User: danielwoods
@@ -13,16 +15,16 @@ import static org.ratpackframework.groovy.Util.with
  */
 class ContextExtensions {
 
-    static void "send boring"(Context context, String txt) {
-        context.response.send "plain/text", txt
+    static void "send boring"(Context context, FuckOff f) {
+        context.response.send "plain/text", "$f.message $f.subtitle"
     }
 
-    static void "send json"(Context context, String txt) {
-        context.response.send "application/json", txt
+    static void "send json"(Context context, FuckOff f) {
+        context.response.send "application/json", toJson(f)
     }
 
-    static void "send html"(Context context, Template template) {
-        context.render template
+    static void "send html"(Context context, FuckOff f) {
+        context.render groovyTemplate("fuckoff.html", f: f)
     }
 
     static void "send pdf"(Context context, FuckOff f) {
