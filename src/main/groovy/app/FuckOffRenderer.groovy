@@ -3,8 +3,7 @@ package app
 import org.ratpackframework.handling.Context
 import org.ratpackframework.render.ByTypeRenderer
 
-import static groovy.json.JsonOutput.toJson
-import static org.ratpackframework.groovy.Template.groovyTemplate
+import static org.ratpackframework.groovy.Util.with
 
 class FuckOffRenderer extends ByTypeRenderer<FuckOff> {
 
@@ -14,11 +13,19 @@ class FuckOffRenderer extends ByTypeRenderer<FuckOff> {
 
     @Override
     void render(Context ctx, FuckOff f) {
-        ctx.given {
-            text { "send boring" f }
-            html { "send html" f }
-            json { "send json" f }
-            pdf  { "send pdf" f }
+        with(ctx.accepts) {
+            plainText {
+              ctx."send boring" f
+            }
+            html {
+              ctx."send html" f
+            }
+            json {
+              ctx."send json" f
+            }
+            pdf  {
+              ctx."send pdf" f
+            }
         }
     }
 }
