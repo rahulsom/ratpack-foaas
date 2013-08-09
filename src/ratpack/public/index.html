@@ -3,21 +3,60 @@
 <head>
     <title>Fuck Off As A Service </title>
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic|Engagement|Playfair+Display:700,700italic" rel="stylesheet" type="text/css">
     <style>
-        body { width: 900px; }
+        body {
+            margin: 0 auto;
+            background: url(img/fuckoff.jpg) no-repeat;
+            background-size: 350px;
+        }
+        .hero-unit {
+            text-align: center;
+            font-family: 'Courier New', courier, monospace;
+            font-size: 14px;
+            background-color: #000;
+            color: #bbb;
+            border-radius: 0;
+        }
+        .hero-unit h2 {
+            font-family: 'Engagement', sans-serif;
+            font-size: 72px;
+            line-height: 72px;
+        }
+        .hero-unit h1 {
+            font-size: 72px;
+        }
+        .gh > a {
+            text-decoration: none;
+            color: #eee;
+            font-size: 96px;
+            text-shadow: 1px 1px 25px #6cbeee;
+
+        }
+        .gh > a:hover {
+            text-shadow: 1px 1px 25px #eeec48;
+            -webkit-transition: 1s text-shadow;
+        }
+        p.note {
+            font-size: 10px;
+            line-height:1;
+            margin-top: 35px;
+        }
     </style>
+
 </head>
 <body>
 <div class="container">
     <div class="hero-unit">
         <h1>FOAAS</h1>
-        <h2>Fuck Off As A Service</h2>
+        <h2>Fuck Off as a Service</h2>
 
         <p>A <a href="http://ratpack-framework.org" target="_blank">ratpack</a> FOAAS implementation based on <a href="http://www.foaas.com">FOAAS v0.0.1</a></p>
 
-        <p><strong>Note:</strong> this is not my idea, just my implementation. See <a href="#credits">credits</a> for more details</p>
+        <p class="gh"><a href="https://github.com/danveloper/ratpack-foaas" target="_blank"><i class="icon-github"></i></a></p>
 
-        <p><a href="https://github.com/danveloper/ratpack-foaas" class="btn btn-primary"><i class="icon-file icon-white"></i> View the source on github</a></p>
+        <p class="note"><strong>Note:</strong><br/> this is not my idea, just my implementation. See <a href="#credits">credits</a> for more details</p>
 
     </div>
 </div>
@@ -34,6 +73,7 @@
         <ul>
             <li>text/plain - Content will be returned as a plain string.</li>
             <li>application/json - Content will be returned as a JSON object { message: 'message', subtitle: 'subtitle' }</li>
+            <li>application/xml - Content will be returned as a XML string &lt;fuckoff&gt;&lt;message&gt;message&lt;/message&gt;&lt;subtitle&gt;subtitle&lt;/subtitle&gt;&lt;/fuckoff&gt;</li>
             <li>text/html - Content will be returned as an HTML page with a twitter bootstrap hero unit, containing the message and the subtitle.</li>
             <li>application/pdf - Content will be returned as a password protected PDF document, containing the message and the subtitle.</li>
         </ul>

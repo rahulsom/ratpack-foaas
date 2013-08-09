@@ -40,7 +40,7 @@ class FuckOffExtensions {
   static String toXml(FuckOff f) {
     def sw = new StringWriter()
     def builder = new MarkupBuilder(sw)
-    builder {
+    builder.fuckoff {
       "message" f.message
       "subtitle" f.subtitle
     }
