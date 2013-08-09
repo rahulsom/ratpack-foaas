@@ -1,4 +1,4 @@
 moduleName=ratpack-foaas
 moduleVersion=0-1-KICKASS.FINAL.MASTER.MOTHAFUCKA
-extensionClasses=ext.StringExtensions, ext.ByAcceptsResponderExtensions, ext.ContextExtensions, ext.FuckOffExtensions
+extensionClasses=ext.StringExtensions, ext.ContextExtensions, ext.FuckOffExtensions
 staticExtensionClasses=

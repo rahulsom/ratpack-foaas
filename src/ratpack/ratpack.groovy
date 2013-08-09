@@ -14,12 +14,7 @@ ratpack {
             def to = (pathTokens.p2 ? pathTokens.p1 : null)?.decodeHtml()
             def from = (pathTokens.p2 ?: pathTokens.p1)?.decodeHtml()
 
-            def f = service.get(pathTokens.type, from, to)
-            if (f) {
-                render f
-            } else {
-                clientError 404
-            }
+            "send object if available" service.get(pathTokens.type, from, to)
         }
 
         assets "public", "index.html"
