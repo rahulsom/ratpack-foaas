@@ -2,12 +2,12 @@ package app
 
 class FuckOff {
 
-    final String message
-    final String subtitle
+  final String message
+  final String subtitle
 
-    FuckOff(String message, String subtitle) {
-        this.message = message
-        this.subtitle = subtitle
-    }
+  FuckOff(String message, String subtitle) {
+    this.message = message
+    this.subtitle = subtitle
+  }
 
 }
