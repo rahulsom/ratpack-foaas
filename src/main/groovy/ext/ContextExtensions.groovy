@@ -1,5 +1,6 @@
 package ext
 
+import app.DestructurablePathTokens
 import app.FuckOff
 import io.netty.buffer.Unpooled
 import org.ratpackframework.groovy.Template
@@ -12,6 +13,10 @@ import static org.ratpackframework.groovy.Template.groovyTemplate
  * Date: 8/7/13
  */
 class ContextExtensions {
+
+  static DestructurablePathTokens getBetterPathTokens(Context context) {
+    new DestructurablePathTokens(context.pathTokens)
+  }
 
   static void "send boring"(Context context, FuckOff f) {
     context.response.send "plain/text", "$f.message $f.subtitle"

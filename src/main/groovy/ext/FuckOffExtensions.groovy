@@ -5,6 +5,8 @@ import com.itextpdf.text.Document
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
 import groovy.xml.MarkupBuilder
+import org.apache.commons.httpclient.HttpClient
+import org.apache.commons.httpclient.methods.GetMethod
 
 /**
  * User: danielwoods
@@ -35,6 +37,15 @@ class FuckOffExtensions {
     }
 
     outputStream.toByteArray()
+  }
+
+  static byte[] toMp3(FuckOff f) {
+    def fuck = f.message.substring(0, Math.min(f.message.length(), 50))
+    def from = f.subtitle
+    def msg = "$fuck From $from".encodeHtml()
+    def get = new GetMethod("http://translate.google.com/translate_tts?tl=en&q=$msg")
+    new HttpClient().executeMethod(get)
+    new BufferedInputStream(get.getResponseBodyAsStream()).bytes
   }
 
   static String toXml(FuckOff f) {

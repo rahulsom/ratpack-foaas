@@ -78,92 +78,168 @@
             <li>application/pdf - Content will be returned as a password protected PDF document, containing the message and the subtitle.</li>
         </ul>
 
+        <br/>
+        <h3 style="text-align: center">MP3 support is available for all API endpoints using the <span style="font-family:'Courier New'">/mp3</span> prefix.</h3>
+        <br/>
+
         <h2>API</h2>
 
         <h3>/off/:name/:from</h3>
 
         <p>Will return content of the form 'Fuck off, :name. - :from', e.g. <a href="/off/Tom/Chris">/off/Tom/Chris</a> will return 'Fuck off, Tom - Chris'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/off/Tom/Chris">/mp3/off/Tom/Chris</a>
+        </span>
+
 
         <h3>/you/:name/:from</h3>
 
         <p>Will return content of the form 'Fuck you, :name. - :from', e.g. <a href="/you/Tom/Chris">/you/Tom/Chris</a> will return 'Fuck you, Tom - Chris'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/you/Tom/Chris">/mp3/you/Tom/Chris</a>
+        </span>
 
         <h3>/this/:from</h3>
 
         <p>Will return content of the form 'Fuck this - :from', e.g. <a href="/this/Chris">/this/Chris</a> will return 'Fuck this. - Chris'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/this/Chris">/mp3/this/Chris</a>
+        </span>
 
         <h3>/that/:from</h3>
 
         <p>Will return content of the form 'Fuck that. - :from', e.g. <a href="/that/Chris">/that/Chris</a> will return 'Fuck that. - Chris'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/that/Chris">/mp3/that/Chris</a>
+        </span>
 
         <h3>/everything/:from</h3>
 
         <p>Will return content of the form 'Fuck everything. - :from', e.g. <a href="/everything/Chris">/everything/Chris</a> will return 'Fuck everything. - Chris'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/everything/Chris">/mp3/everything/Chris</a>
+        </span>
 
         <h3>/everyone/:from</h3>
 
         <p>Will return content of the form 'Everyone can go and fuck off. - :name', e.g. <a href="/everyone/Tom">/everyone/Tom</a> will return 'Everyone can go and fuck off. - Tom'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/everyone/Tom">/mp3/everyone/Chris</a>
+        </span>
 
         <h3>/donut/:name/:from</h3>
 
         <p>Will return content of the form ':name, go and take a flying fuck at a rolling donut. - :from', e.g. <a href="/donut/Tom/Chris">/donut/Tom/Chris</a> will return 'Tom, go and take a flying fuck at a rolling donut. - Chris'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/donut/Tom/Chris">/mp3/donut/Tom/Chris</a>
+        </span>
 
         <h3>/shakespeare/:name/:from</h3>
 
         <p>Will return content of the form ':name, Thou clay-brained guts, thou knotty-pated fool, thou whoreson obscene greasy tallow-catch! - :from', e.g. <a href="/shakespeare/Falstaff/Prince%20Henry">/shakespeare/Falstaff/Prince%20Henry</a> will return 'Falstaff, Thou clay-brained guts, thou knotty-pated fool, thou whoreson obscene greasy tallow-catch! - Prince Henry</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/shakespeare/Falstaff/Prince+Henry">/mp3/shakespeare/Falstaff/Prince+Henry</a>
+        </span>
 
         <h3>/linus/:name/:from</h3>
 
         <p>Will return content of the form ':name, there aren't enough swear-words in the English language, so now I'll have to call you perkeleen vittupää just to express my disgust and frustration with this crap. - :from'. </p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/linus/Tom/Chris">/mp3/linus/Tom/Chris</a>
+        </span>
 
         <h3>/king/:name/:from</h3>
 
         <p>Will return content of the form 'Oh fuck off, just really fuck off you total dickface. Christ :name, you are fucking thick. - :from'. </p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/king/Tom/Chris">/mp3/king/Tom/Chris</a>
+        </span>
 
         <h3>/pink/:from</h3>
 
         <p>Will return content of the form 'Well, Fuck me pink. - :from'. </p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/pink/Chris">/mp3/pink/Chris</a>
+        </span>
 
         <h3>/life/:from</h3>
 
         <p>Will return content of the form 'Fuck my life. - :from', e.g. <a href="/life/Phil">/life/Phil</a> will return 'Fuck my life. - Phil'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/life/Chris">/mp3/life/Chris</a>
+        </span>
 
         <h3>/chainsaw/:name/:from</h3>
 
         <p>Will return content of the form 'Fuck me gently with a chainsaw, :name. Do I look like Mother Teresa? - :from', e.g. <a href="/chainsaw/Chris/Heather">/chainsaw/Chris/Heather</a> will return 'Fuck me gently with a chainsaw, Chris. Do I look like Mother Teresa? - Heather</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/chainsaw/Tom/Chris">/mp3/chainsaw/Tom/Chris</a>
+        </span>
 
         <h3>/thanks/:from</h3>
         <p>Will return content of the form 'Fuck you very much. - :from'.</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/thanks/Chris">/mp3/thanks/Chris</a>
+        </span>
 
         <h3>/blink182/:object/:receptacle</h3>
 
         <p style="margin-bottom:0px">Will return content of the form 'I want to fuck a :object, in the :receptable. - That's right kids', e.g. <a href="/blink182/generation/%E2%99%A5">/blink182/generation/%E2%99%A5</a> will return 'I want to fuck a generation, in the ♥. - That's right kids'.</p>
         <span style="font-style:italic; font-size: 12px; color:#888">see <a href="http://www.youtube.com/watch?v=Dg8A6RYRH6Y" target="_blank">http://www.youtube.com/watch?v=Dg8A6RYRH6Y</a></span>
+        <br/>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/blink182/generation/heart">/mp3/blink182/generation/heart</a>
+        </span>
 
         <h3>/keepcalm/:name/:from</h3>
 
         <p>Will return content of the form 'Keep Calm :name and Fuck Off - :from', e.g. <a href="/keepcalm/Chris/Heather">/keepcalm/Chris/Heather</a> will return 'Keep Calm Chris and Fuck Off - Heather'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/keepcalm/Chris/Heather">/mp3/keepcalm/Chris/Heather</a>
+        </span>
+
 
         <h3>/steviewonder/:name/:from</h3>
 
         <p>Will return content of the form 'I just called, to say..........:name FUCK OFF! - :from', e.g. <a href="/steviewonder/Chris/Heather">/steviewonder/Chris/Heather</a> will return 'I just called, to say..........Chris FUCK OFF! - Heather'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/steviewonder/Chris/Heather">/mp3/steviewonder/Chris/Heather</a>
+        </span>
+
 
         <h3>/malcolmtucker/:from</h3>
         <p>Will return content of the form 'I will tear your fucking skin off, I will wear it to your mother's birthday party and rub your nuts up and down her leg whilst whistling Bohemian fucking Rhapsody. Right? - :from', e.g. <a href="/malcolmtucker/Malcolm">/malcolmtucker/Malcolm</a> will return 'I will tear your fucking skin off, I will wear it to your mother's birthday party and rub your nuts up and down her leg whilst whistling Bohemian fucking Rhapsody. Right? - Malcolm'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/malcolmtucker/Malcolm">/mp3/malcolmtucker/Malcolm</a>
+        </span>
 
         <h3>/swearengen/:to/:from</h3>
         <p>Will return content of the form 'I will profane your fucking remains, $to! - :from', e.g. <a href="/swearengen/E.B./Al">/swearengen/E.B./Al</a> will return 'I will profane your fucking remains, E.B.! - Al'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/swearengen/EB/Al">/mp3/swearengen/EB/Al</a>
+        </span>
 
         <h3>/justinbieber/:from</h3>
         <p>Will return content of the form 'There's gonna be times in your life when people say you can't do something. And there's gonna be times in your life when people say that you can't live your dreams. This is what I tell them: FUCK OFF! - :from', e.g. <a href="/justinbieber/Heather">/justinbieber/Heather</a> will return 'There's gonna be times in your life when people say you can't do something. And there's gonna be times in your life when people say that you can't live your dreams. This is what I tell them: FUCK OFF! - Heather'</p>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/justinbieber/Eric">/mp3/justinbieber/Eric</a>
+        </span>
 
         <h3>/arthur/:to/:from</h3>
         <p style="margin-bottom:0px">Will return content of the form 'How shall $to fuck off, O Lord? - :from', e.g. <a href="/arthur/we/Arthur">/arthur/we/Arthur</a> will return 'How shall we fuck off, O Lord? - Arthur'</p>
         <span style="font-style:italic; font-size: 12px; color:#888">see <a href="http://www.youtube.com/watch?v=kz6Dqi3qJiU" target="_blank">http://www.youtube.com/watch?v=kz6Dqi3qJiU</a></span>
+        <br/>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/arthur/Sean/Dan">/mp3/arthur/Sean/Dan</a>
+        </span>
 
         <h3>/ceccoangiolieri/:to/:from</h3>
         <p>Will return content of the form ':to, s'i' so' buon begolardo, - tu me ne tien' ben la lancia a le reni; - s'i' desno con altrui, e tu vi ceni; - s'io mordo 'l grasso, e tu vi sughi el lardo; - s'io cimo 'l panno, e tu vi freghi el cardo. - :from'</p>
         <span style="font-style:italic; font-size: 12px; color:#888">see <a href="http://en.wikipedia.org/wiki/Cecco_Angiolieri" target="_blank">http://en.wikipedia.org/wiki/Cecco_Angiolieri</a></span>
+        <br/>
+        <span style="font-style:italic; font-size: 12px; color:#888">
+            mp3 - <a href="/mp3/ceccoangiolieri/Tom/Chris">/mp3/ceccoangiolieri/Tom/Chris</a>
+        </span>
 
         <h2 id="credits">Credits</h2>
 

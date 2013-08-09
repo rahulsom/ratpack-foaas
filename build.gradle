@@ -1,40 +1,41 @@
 buildscript {
-    repositories {
-        maven { url "http://oss.jfrog.org/repo" }
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.ratpack-framework:ratpack-gradle:0.9.0-SNAPSHOT'
-    }
+  repositories {
+    maven { url "http://oss.jfrog.org/repo" }
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.ratpack-framework:ratpack-gradle:0.9.0-SNAPSHOT'
+  }
 }
 
 repositories {
-    maven { url "http://oss.jfrog.org/repo" }
-    mavenCentral()
-    maven { url "http://repo.springsource.org/repo" } // for springloaded
+  maven { url "http://oss.jfrog.org/repo" }
+  mavenCentral()
+  maven { url "http://repo.springsource.org/repo" } // for springloaded
 }
 
 apply plugin: "ratpack-groovy"
 
 configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+  resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
 ext {
-    authors = [
-            'Dan Woods',
-            'Luke Daley',
-            'Eric Ridge',
-            'Russell Hart'
-    ]
+  authors = [
+    'Dan Woods',
+    'Luke Daley',
+    'Eric Ridge',
+    'Russell Hart'
+  ]
 }
 
 println "Ratpack FOAAS - By: ${authors.join(', ')}"
 
 dependencies {
-    springloaded "org.springsource.springloaded:springloaded-core:1.1.1"
-    compile "com.itextpdf:itextpdf:5.4.2"
-    runtime 'org.bouncycastle:bcprov-jdk15on:1.49'
+  springloaded "org.springsource.springloaded:springloaded-core:1.1.1"
+  compile "com.itextpdf:itextpdf:5.4.2"
+  runtime 'org.bouncycastle:bcprov-jdk15on:1.49'
+  compile 'commons-httpclient:commons-httpclient:3.1'
 }
 
 apply plugin: "idea"
