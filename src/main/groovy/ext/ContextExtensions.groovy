@@ -34,7 +34,7 @@ class ContextExtensions {
   }
 
   static void "send pdf"(Context context, FuckOff f) {
-    context.response.send Unpooled.copiedBuffer(f.toPdf())
+    context.response.send "application/pdf", Unpooled.copiedBuffer(f.toPdf())
   }
 
   static void "send object if available"(Context context, FuckOff f) {
