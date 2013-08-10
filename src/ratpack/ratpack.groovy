@@ -1,11 +1,10 @@
-import app.DestructurablePathTokens
 import app.FoaasModule
 import app.FuckOff
 import app.FuckOffService
+
 import static io.netty.buffer.Unpooled.copiedBuffer
-
-
 import static org.ratpackframework.groovy.RatpackScript.ratpack
+import static org.ratpackframework.groovy.Util.exec
 
 ratpack {
   modules {
@@ -20,7 +19,9 @@ ratpack {
       get(":type/:p1/:p2?") {
         def (to, from, type) = betterPathTokens
         FuckOff f = service.get(type, from, to)
-        response.send "audio/mpeg", copiedBuffer(f.toMp3())
+        exec blocking, { f.toMp3() }, { byte[] bytes ->
+            response.send "audio/mpeg", copiedBuffer(bytes)
+        }
       }
     }
     get(":type/:p1/:p2?") {
