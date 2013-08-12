@@ -39,3 +39,5 @@ dependencies {
 }
 
 apply plugin: "idea"
+
+sourceCompatibility = "1.7"
