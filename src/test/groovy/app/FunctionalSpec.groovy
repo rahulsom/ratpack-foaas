@@ -31,15 +31,14 @@ class FunctionalSpec extends ScriptAppSpec {
         body.asString().contains "Fuck off, to."
       }
 
-      //TODO Get this test working. It just hangs, assume it's because of the passsword prompt.
-      /*when:
+      when:
       request.header("Accept", "application/pdf")
 
       then:
       with(get("off/to/from")) {
           contentType == "application/pdf;charset=UTF-8"
           body.asString().startsWith "%PDF"
-      }*/
+      }
   }
 
   def "handles unknowns"() {
