@@ -1,10 +1,20 @@
 package app
 
-import org.ratpackframework.test.ScriptAppSpec
+import org.ratpackframework.groovy.test.LocalScriptApplicationUnderTest
+import org.ratpackframework.groovy.test.TestHttpClient
 import spock.lang.Unroll
+import spock.lang.Specification
+
 
 @Unroll
-class FunctionalSpec extends ScriptAppSpec {
+class FunctionalSpec extends Specification {
+
+	def aut = new LocalScriptApplicationUnderTest()
+	@Delegate TestHttpClient client = aut.httpClient()
+
+	def setup() {
+		client.resetRequest()
+	}
 
   def "content negotiation"() {
     when:
@@ -12,7 +22,9 @@ class FunctionalSpec extends ScriptAppSpec {
 
     then:
       getText("off/to/from") == "Fuck off, to. - from"
+	}
 
+	def "Content Negotiation JSON"() {
     when:
       request.header("Accept", "application/json")
 
@@ -21,7 +33,9 @@ class FunctionalSpec extends ScriptAppSpec {
         get("message") == "Fuck off, to."
         get("subtitle") == "- from"
       }
+	}
 
+	def "Content Negotiation text/HTML"() {
     when:
       request.header("Accept", "text/html")
 
@@ -30,16 +44,17 @@ class FunctionalSpec extends ScriptAppSpec {
         contentType == "text/html;charset=UTF-8"
         body.asString().contains "Fuck off, to."
       }
+	}
 
-      //TODO Get this test working. It just hangs, assume it's because of the passsword prompt.
-      /*when:
+	def "Content Negotiation pdf"() {
+      when:
       request.header("Accept", "application/pdf")
 
       then:
       with(get("off/to/from")) {
-          contentType == "application/pdf;charset=UTF-8"
+          contentType == "application/pdf"
           body.asString().startsWith "%PDF"
-      }*/
+      }
   }
 
   def "handles unknowns"() {
@@ -77,4 +92,8 @@ class FunctionalSpec extends ScriptAppSpec {
       "arthur/to/from"          | "How shall to fuck off, O Lord? - from"
       "ceccoangiolieri/to/from" | "to, s'i' so' buon begolardo, - tu me ne tien' ben la lancia a le reni; - s'i' desno con altrui, e tu vi ceni; - s'io mordo 'l grasso, e tu vi sughi el lardo; - s'io cimo 'l panno, e tu vi freghi el cardo. - from"
   }
+
+	def cleanup() {
+		aut.stop()
+	}
 }

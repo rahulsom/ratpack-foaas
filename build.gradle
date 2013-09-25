@@ -36,6 +36,7 @@ dependencies {
   compile "com.itextpdf:itextpdf:5.4.2"
   runtime 'org.bouncycastle:bcprov-jdk15on:1.49'
   compile 'commons-httpclient:commons-httpclient:3.1'
+	testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
 }
 
 apply plugin: "idea"
