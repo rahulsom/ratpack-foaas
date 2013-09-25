@@ -2,9 +2,11 @@ package app
 
 import com.google.inject.AbstractModule
 import groovy.text.SimpleTemplateEngine
+import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
 
 class FoaasModule extends AbstractModule {
 
+  static int i = 0
   final URL resource
 
   FoaasModule(URL resource) {

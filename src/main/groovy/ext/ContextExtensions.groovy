@@ -7,6 +7,8 @@ import org.ratpackframework.handling.Context
 
 import static groovy.json.JsonOutput.toJson
 import static org.ratpackframework.groovy.Template.groovyTemplate
+import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
+
 /**
  * User: danielwoods
  * Date: 8/7/13
@@ -29,6 +31,10 @@ class ContextExtensions {
     context.render groovyTemplate("fuckoff.html", f: f)
   }
 
+  static void "broadcast fuck"(Context context, FuckOff f) {
+    BROADCASTER.broadcast toJson(f)
+  }
+
   static void "send xml"(Context context, FuckOff f) {
     context.response.send f.toXml()
   }
@@ -42,6 +48,7 @@ class ContextExtensions {
       context.clientError 404
     } else {
       context.with {
+        "broadcast fuck" f
         respond byContent
         /* Remember, order matters */
           .plainText { "send boring" f }

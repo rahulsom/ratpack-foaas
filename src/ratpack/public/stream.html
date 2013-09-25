@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0 auto;
+            background: url(img/fuckoff.jpg) no-repeat;
+            background-size: 350px;
+        }
+        #content {
+            margin-top: 30px;
+        }
+        #content > div {
+            width: 600px;
+            margin: 0px auto;
+            border: 3px double #ccc;
+            margin-bottom: 30px;
+        }
+        .msg {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="content">
+    <span></span>
+</div>
+
+<script type="text/template" id="fuck-tmpl">
+    <div class="hero-unit msg">
+        <h1><%= message %></h1>
+        <p><em><%= subtitle %></em></p>
+    </div>
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var tmpl = _.template($("#fuck-tmpl").html());
+
+    connectWs();
+
+    function connectWs() {
+        if (!window.ws || window.ws.readyState != WebSocket.OPEN) {
+            window.ws = new WebSocket("ws://localhost:5050/ws");
+
+            window.ws.onopen = function(event) {
+                console.log("WebSocket opened!");
+            };
+            window.ws.onmessage = function(event) {
+                var json = JSON.parse(event.data);
+                var $msg = $(tmpl(json));
+                if ($("#content").children().size() > 10) {
+                    $("#content").children().last().remove();
+                }
+                $msg.insertBefore( $("#content").children().first());
+                $msg.slideDown();
+            };
+            window.ws.onclose = function(event) {
+                var timer = setTimeout(function() {
+                    console.log("Retrying connection...");
+                    connectWs();
+                    if (window.ws.readyState == WebSocket.OPEN) {
+                        clearTimeout(timer);
+                    }
+                }, 1000);
+            };
+        }
+    }
+
+</script>
+</body>
+</html>

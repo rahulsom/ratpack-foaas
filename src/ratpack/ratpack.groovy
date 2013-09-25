@@ -6,12 +6,22 @@ import static io.netty.buffer.Unpooled.copiedBuffer
 import static org.ratpackframework.groovy.RatpackScript.ratpack
 import static org.ratpackframework.groovy.Util.exec
 
+import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
+
+
 ratpack {
   modules {
     register new FoaasModule(getClass().getResource("messages.properties"))
   }
 
   handlers { FuckOffService service ->
+    handler {
+      if (request.path.empty || request.path == "index.html") {
+        response.headers.set "X-UA-Compatible", "IE=edge,chrome=1"
+      }
+      next()
+    }
+
     prefix("img") {
       assets "public/img", [] as String[]
     }
@@ -24,6 +34,10 @@ ratpack {
         }
       }
     }
+    prefix("stream") {
+      assets "public", "stream.html"
+    }
+
     get(":type/:p1/:p2?") {
       def (to, from, type) = betterPathTokens
       "send object if available" service.get(type, from, to)
@@ -32,4 +46,3 @@ ratpack {
     assets "public", "index.html"
   }
 }
-
