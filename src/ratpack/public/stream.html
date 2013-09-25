@@ -49,7 +49,7 @@
 
         function connectWs() {
             if (!window.ws || window.ws.readyState != WebSocket.OPEN) {
-                window.ws = new WebSocket("ws://localhost:5050/ws");
+                window.ws = new WebSocket("ws://"+location.host+"/ws");
 
                 window.ws.onopen = function(event) {
                     console.log("WebSocket opened!");
