@@ -11,6 +11,9 @@
         #content {
             margin-top: 30px;
         }
+        #content > h1 {
+            text-align: center;
+        }
         #content > div {
             width: 600px;
             margin: 0px auto;
@@ -25,6 +28,7 @@
 <body>
 
 <div id="content">
+    <h1>Waiting for Fucks...</h1>
     <span></span>
 </div>
 
@@ -38,36 +42,43 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var tmpl = _.template($("#fuck-tmpl").html());
+    if (!window.WebSocket) {
+        alert("This won't work in your browser. Try Chrome or a gooder version of Safari.");
+    } else {
+        var tmpl = _.template($("#fuck-tmpl").html());
 
-    connectWs();
+        function connectWs() {
+            if (!window.ws || window.ws.readyState != WebSocket.OPEN) {
+                window.ws = new WebSocket("ws://localhost:5050/ws");
 
-    function connectWs() {
-        if (!window.ws || window.ws.readyState != WebSocket.OPEN) {
-            window.ws = new WebSocket("ws://localhost:5050/ws");
-
-            window.ws.onopen = function(event) {
-                console.log("WebSocket opened!");
-            };
-            window.ws.onmessage = function(event) {
-                var json = JSON.parse(event.data);
-                var $msg = $(tmpl(json));
-                if ($("#content").children().size() > 10) {
-                    $("#content").children().last().remove();
-                }
-                $msg.insertBefore( $("#content").children().first());
-                $msg.slideDown();
-            };
-            window.ws.onclose = function(event) {
-                var timer = setTimeout(function() {
-                    console.log("Retrying connection...");
-                    connectWs();
-                    if (window.ws.readyState == WebSocket.OPEN) {
-                        clearTimeout(timer);
+                window.ws.onopen = function(event) {
+                    console.log("WebSocket opened!");
+                };
+                window.ws.onmessage = function(event) {
+                    var json = JSON.parse(event.data);
+                    var $msg = $(tmpl(json));
+                    if ($("#content > h1").length) {
+                        $("#content > h1").remove();
                     }
-                }, 1000);
-            };
+                    if ($("#content").children().size() > 10) {
+                        $("#content").children().last().remove();
+                    }
+                    $msg.insertBefore( $("#content").children().first());
+                    $msg.slideDown();
+                };
+                window.ws.onclose = function(event) {
+                    var timer = setTimeout(function() {
+                        console.log("Retrying connection...");
+                        connectWs();
+                        if (window.ws.readyState == WebSocket.OPEN) {
+                            clearTimeout(timer);
+                        }
+                    }, 1000);
+                };
+            }
         }
+
+        connectWs();
     }
 
 </script>

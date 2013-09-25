@@ -6,9 +6,6 @@ import static io.netty.buffer.Unpooled.copiedBuffer
 import static org.ratpackframework.groovy.RatpackScript.ratpack
 import static org.ratpackframework.groovy.Util.exec
 
-import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
-
-
 ratpack {
   modules {
     register new FoaasModule(getClass().getResource("messages.properties"))

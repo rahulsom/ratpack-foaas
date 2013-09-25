@@ -5,10 +5,9 @@ import app.FuckOff
 import io.netty.buffer.Unpooled
 import org.ratpackframework.handling.Context
 
+import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
 import static groovy.json.JsonOutput.toJson
 import static org.ratpackframework.groovy.Template.groovyTemplate
-import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
-
 /**
  * User: danielwoods
  * Date: 8/7/13

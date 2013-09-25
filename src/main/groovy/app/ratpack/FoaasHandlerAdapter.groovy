@@ -3,16 +3,15 @@ package app.ratpack
 import com.google.common.util.concurrent.ListeningExecutorService
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.http.FullHttpRequest
-import io.netty.handler.codec.http.websocketx.*
+import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker
+import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory
 import org.ratpackframework.handling.Handler
 import org.ratpackframework.launch.LaunchConfig
 import org.ratpackframework.server.internal.NettyHandlerAdapter
 
+import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
 import static io.netty.handler.codec.http.HttpHeaders.Names.HOST
 import static io.netty.handler.codec.http.HttpHeaders.Names.UPGRADE
-
-import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
-
 /**
  * User: danielwoods
  * Date: 9/25/13
