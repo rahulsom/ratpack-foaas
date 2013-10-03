@@ -5,6 +5,7 @@ import app.FuckOffService
 import static io.netty.buffer.Unpooled.copiedBuffer
 import static org.ratpackframework.groovy.RatpackScript.ratpack
 import static org.ratpackframework.groovy.Util.exec
+import static groovy.json.JsonOutput.toJson
 
 ratpack {
   modules {
@@ -22,6 +23,11 @@ ratpack {
     prefix("img") {
       assets "public/img", [] as String[]
     }
+
+    get("api") {
+      response.send toJson(service.getApi())
+    }
+
     prefix("mp3") {
       get(":type/:p1/:p2?") {
         def (to, from, type) = betterPathTokens
@@ -31,6 +37,7 @@ ratpack {
         }
       }
     }
+
     prefix("stream") {
       assets "public", "stream.html"
     }
