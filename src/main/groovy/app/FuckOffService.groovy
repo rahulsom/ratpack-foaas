@@ -36,11 +36,17 @@ class FuckOffService {
   }
 
   FuckOff get(String key, String from, String to) {
-    def params = [from: from, to: to]
     def fuckOffResource = foaasResources.get(key)
-    def message = render(fuckOffResource.message, params)
-    def subtitle = render(fuckOffResource.subtitle, params)
-    new FuckOff(message, subtitle)
+    def fuckOff = null
+
+    if (fuckOffResource) {
+      def params = [from: from, to: to]
+      def message = render(fuckOffResource.message, params)
+      def subtitle = render(fuckOffResource.subtitle, params)
+      fuckOff = new FuckOff(message, subtitle)
+    }
+
+    return fuckOff
   }
 
   private String render(String template, Map<?, ?> params) {
