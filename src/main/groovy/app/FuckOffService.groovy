@@ -4,35 +4,30 @@ import groovy.text.SimpleTemplateEngine
 
 class FuckOffService {
 
-  private static final String EXAMPLE_FROM_NAME = 'Dave'
-  private static final String EXAMPLE_TO_NAME = 'Mike'
-  private static final String MESSAGE_PROPERTY_SUFFIX = '.message'
-  private static final String SUBTITLE_PROPERTY_SUFFIX = '.subtitle'
-  private static final String PROPERTY_PREFIX = 'fuckOff.'
+  private static final Map EXAMPLE_PARAMS = [from: 'Dave', to: 'Mike']
 
   private final Map<String, FuckOffApiResource> foaasResources = [:]
   private final SimpleTemplateEngine templateEngine
 
   FuckOffService(Properties messages, SimpleTemplateEngine templateEngine) {
     this.templateEngine = templateEngine
-
-    def exampleFuckOffParams = [from: EXAMPLE_FROM_NAME, to: EXAMPLE_TO_NAME]
-    messages.each { property ->
-      if (property.key.endsWith(MESSAGE_PROPERTY_SUFFIX)) {
-        def key = property.key.replace(PROPERTY_PREFIX, '').replace(MESSAGE_PROPERTY_SUFFIX, '')
-        def message = messages.getProperty(PROPERTY_PREFIX + key + MESSAGE_PROPERTY_SUFFIX)
-        def subtitle = messages.getProperty(PROPERTY_PREFIX + key + SUBTITLE_PROPERTY_SUFFIX)
-
-        def uri = "/$key" + ((message + subtitle).contains('$to')?'/$to':'') + '/$from'
-        def exampleUri = render(uri, exampleFuckOffParams)
-        def exampleFuckOff = new FuckOff(
-                render(message, exampleFuckOffParams),
-                render(subtitle, exampleFuckOffParams))
-
-        def foaasResource = new FuckOffApiResource(uri, message, subtitle, exampleUri, exampleFuckOff)
-        this.foaasResources.put(key, foaasResource)
-      }
+    Map m = messages.keySet().collect{it.split('\\.').reverse() as Stack}.inject([:]) {m,v->c v,m;m}
+    messages.each {k,v->Eval.x m,"x.$k='${v.replaceAll("'", "\\\\'")}'"}
+    m.fuckOff.each { String key, Map value ->
+      def (msg, subtitle, uri) = destructure(key, value).collect { render it, EXAMPLE_PARAMS }
+      this.foaasResources."$key" = [uri, msg, subtitle, uri, [msg, subtitle] as FuckOff] as FuckOffApiResource
     }
+  }
+
+  static final def c = { Stack stack, Map last ->
+    def key = stack.pop()
+    if (!last[key]) last[key] = [:]
+    last = (Map)last[key]
+    if (stack) FuckOffService.c stack, last
+  }
+
+  static final def destructure = { String key, Map map ->
+    [map.message, map.subtitle, "/$key/\$to/\$from"]
   }
 
   FuckOff get(String key, String from, String to) {
@@ -46,7 +41,7 @@ class FuckOffService {
       fuckOff = new FuckOff(message, subtitle)
     }
 
-    return fuckOff
+    fuckOff
   }
 
   private String render(String template, Map<?, ?> params) {
@@ -54,7 +49,7 @@ class FuckOffService {
   }
 
   List<FuckOffApiResource> getApi() {
-    foaasResources.values().asList()
+    foaasResources.values()
   }
 
 }
