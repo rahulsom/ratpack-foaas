@@ -84,7 +84,6 @@ class FunctionalSpec extends Specification {
 
     where:
       path                      | expectedText
-/*
       "keepcalm/to/from"        | "Keep Calm to and Fuck Off - from"
       "steviewonder/to/from"    | "I just called, to say..........to FUCK OFF! - from"
       "malcolmtucker/from"      | "I will tear your fucking skin off, I will wear it to your mother's birthday party and rub your nuts up and down her leg whilst whistling Bohemian fucking Rhapsody. Right? - from"
@@ -92,7 +91,6 @@ class FunctionalSpec extends Specification {
       "swearengen/E.B./Al"      | "I will profane your fucking remains, E.B.! - Al"
       "arthur/to/from"          | "How shall to fuck off, O Lord? - from"
       "ceccoangiolieri/to/from" | "to, s'i' so' buon begolardo, - tu me ne tien' ben la lancia a le reni; - s'i' desno con altrui, e tu vi ceni; - s'io mordo 'l grasso, e tu vi sughi el lardo; - s'io cimo 'l panno, e tu vi freghi el cardo. - from"
-*/
   }
 
 	def cleanup() {

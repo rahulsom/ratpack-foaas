@@ -14,8 +14,8 @@ class FuckOffService {
     Map m = messages.keySet().collect{it.split('\\.').reverse() as Stack}.inject([:]) {m,v->c v,m;m}
     messages.each {k,v->Eval.x m,"x.$k='${v.replaceAll("'", "\\\\'")}'"}
     m.fuckOff.each { String key, Map value ->
-      def (msg, subtitle, uri) = destructure(key, value).collect { render it, EXAMPLE_PARAMS }
-      this.foaasResources."$key" = [uri, msg, subtitle, uri, [msg, subtitle] as FuckOff] as FuckOffApiResource
+      def (msg, subtitle, uri) = destructure(key, value)
+      this.foaasResources."$key" = [uri, msg, subtitle, render(uri, EXAMPLE_PARAMS), [msg, subtitle] as FuckOff] as FuckOffApiResource
     }
   }
 
@@ -31,7 +31,7 @@ class FuckOffService {
   }
 
   FuckOff get(String key, String from, String to) {
-    def fuckOffResource = foaasResources.get(key)
+    def fuckOffResource = foaasResources."$key"
     def fuckOff = null
 
     if (fuckOffResource) {
