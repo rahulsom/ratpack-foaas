@@ -49,7 +49,7 @@ class FuckOffService {
   }
 
   List<FuckOffApiResource> getApi() {
-    foaasResources.values()
+    foaasResources.values() as List
   }
 
 }
