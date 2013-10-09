@@ -27,7 +27,8 @@ class FuckOffService {
   }
 
   static final def destructure = { String key, Map map ->
-    [map.message, map.subtitle, "/$key/\$to/\$from"]
+    def uri = map.message.contains("\$to") ? "/$key/\$to/\$from" : "/$key/\$from"
+    [map.message, map.subtitle, uri]
   }
 
   FuckOff get(String key, String from, String to) {
