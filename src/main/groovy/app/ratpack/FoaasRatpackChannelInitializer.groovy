@@ -8,8 +8,9 @@ import io.netty.channel.socket.SocketChannel
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.ssl.SslHandler
-import org.ratpackframework.handling.Handler
-import org.ratpackframework.launch.LaunchConfig
+import ratpack.handling.Handler
+import ratpack.launch.LaunchConfig
+import ratpack.server.Stopper
 
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLEngine
@@ -21,9 +22,9 @@ class FoaasRatpackChannelInitializer extends ChannelInitializer<SocketChannel> {
   private FoaasHandlerAdapter handlerAdapter;
   private SSLContext sslContext;
 
-  public FoaasRatpackChannelInitializer(LaunchConfig launchConfig, Handler handler) {
-    ListeningExecutorService blockingExecutorService = MoreExecutors.listeningDecorator(launchConfig.getBlockingExecutorService());
-    this.handlerAdapter = new FoaasHandlerAdapter(handler, launchConfig, blockingExecutorService);
+  public FoaasRatpackChannelInitializer(LaunchConfig launchConfig, Handler handler, Stopper stopper) {
+    ListeningExecutorService blockingExecutorService = MoreExecutors.listeningDecorator(launchConfig.getBackgroundExecutorService());
+    this.handlerAdapter = new FoaasHandlerAdapter(stopper, handler, launchConfig, blockingExecutorService);
     this.sslContext = launchConfig.getSSLContext();
   }
 

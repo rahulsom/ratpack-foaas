@@ -1,16 +1,16 @@
 buildscript {
   repositories {
     maven { url "http://oss.jfrog.org/repo" }
-    mavenCentral()
+    jcenter()
   }
   dependencies {
-    classpath 'org.ratpack-framework:ratpack-gradle:0.9.0-SNAPSHOT'
+    classpath 'io.ratpack:ratpack-gradle:0.9.0-SNAPSHOT'
   }
 }
 
 repositories {
   maven { url "http://oss.jfrog.org/repo" }
-  mavenCentral()
+  jcenter()
   maven { url "http://repo.springsource.org/repo" } // for springloaded
 }
 
@@ -33,6 +33,7 @@ println "Ratpack FOAAS - By: ${authors.join(', ')}"
 
 dependencies {
   springloaded "org.springsource.springloaded:springloaded-core:1.1.1"
+  compile "io.ratpack:ratpack-jackson:0.9.0-SNAPSHOT"
   compile "com.itextpdf:itextpdf:5.4.2"
   runtime 'org.bouncycastle:bcprov-jdk15on:1.49'
   compile 'commons-httpclient:commons-httpclient:3.1'
@@ -42,3 +43,5 @@ dependencies {
 apply plugin: "idea"
 
 sourceCompatibility = "1.7"
+
+mainClassName = "app.FuckOffMain"
