@@ -7,6 +7,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory
 import ratpack.handling.Handler
 import ratpack.launch.LaunchConfig
+import ratpack.server.Stopper
 import ratpack.server.internal.NettyHandlerAdapter
 
 import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
@@ -23,8 +24,8 @@ class FoaasHandlerAdapter extends NettyHandlerAdapter {
   private static final String WEBSOCKET_UPGRADE_KEY = "websocket"
   private static final String WEBSOCKET_PATH = "/ws"
 
-  FoaasHandlerAdapter(Handler handler, LaunchConfig launchConfig, ListeningExecutorService blockingExecutorService) {
-    super(handler, launchConfig, blockingExecutorService)
+  FoaasHandlerAdapter(Stopper stopper, Handler handler, LaunchConfig launchConfig, ListeningExecutorService blockingExecutorService) {
+    super(stopper, handler, launchConfig, blockingExecutorService)
   }
 
   @Override

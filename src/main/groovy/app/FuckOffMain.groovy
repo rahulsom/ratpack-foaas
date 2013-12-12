@@ -1,6 +1,7 @@
 package app
 
 import app.ratpack.FoaasRatpackServerBuilder
+import ratpack.groovy.launch.GroovyRatpackMain
 import ratpack.launch.LaunchConfig
 import ratpack.launch.LaunchConfigFactory
 import ratpack.launch.RatpackMain
@@ -9,7 +10,7 @@ import ratpack.server.RatpackServer
  * User: danielwoods
  * Date: 9/25/13
  */
-class FuckOffMain extends RatpackMain {
+class FuckOffMain extends GroovyRatpackMain {
 
   Properties overrideProperties
   Properties defaultProperties

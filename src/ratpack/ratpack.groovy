@@ -1,14 +1,15 @@
 import app.FoaasModule
 import app.FuckOff
 import app.FuckOffService
+import ratpack.jackson.JacksonModule
 
-import static io.netty.buffer.Unpooled.copiedBuffer
-import static ratpack.groovy.Groovy.*
-import static groovy.json.JsonOutput.toJson
+import static ratpack.groovy.Groovy.ratpack
+import static ratpack.jackson.Jackson.json
 
 ratpack {
   modules {
     register new FoaasModule(getClass().getResource("messages.properties"))
+    register new JacksonModule()
   }
 
   handlers { FuckOffService service ->
@@ -24,7 +25,7 @@ ratpack {
     }
 
     get("api") {
-      response.send toJson(service.getApi())
+      render json(service.getApi())
     }
 
     prefix("mp3") {
@@ -34,7 +35,7 @@ ratpack {
         background {
           f.toMp3()
         } then { byte[] bytes ->
-            response.send "audio/mpeg", copiedBuffer(bytes)
+          response.send "audio/mpeg", bytes
         }
       }
     }
@@ -45,7 +46,8 @@ ratpack {
 
     get(":type/:p1/:p2?") {
       def (to, from, type) = betterPathTokens
-      "send object if available" service.get(type, from, to)
+      def f = service.get(type, from, to)
+      f ? render(f) : clientError(404)
     }
 
     assets "public", "index.html"
