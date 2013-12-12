@@ -8,8 +8,8 @@ import io.netty.channel.socket.SocketChannel
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.ssl.SslHandler
-import org.ratpackframework.handling.Handler
-import org.ratpackframework.launch.LaunchConfig
+import ratpack.handling.Handler
+import ratpack.launch.LaunchConfig
 
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLEngine

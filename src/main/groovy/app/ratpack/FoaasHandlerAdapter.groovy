@@ -5,9 +5,9 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.http.FullHttpRequest
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory
-import org.ratpackframework.handling.Handler
-import org.ratpackframework.launch.LaunchConfig
-import org.ratpackframework.server.internal.NettyHandlerAdapter
+import ratpack.handling.Handler
+import ratpack.launch.LaunchConfig
+import ratpack.server.internal.NettyHandlerAdapter
 
 import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
 import static io.netty.handler.codec.http.HttpHeaders.Names.HOST

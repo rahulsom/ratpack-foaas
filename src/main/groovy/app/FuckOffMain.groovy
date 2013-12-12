@@ -1,10 +1,10 @@
 package app
 
 import app.ratpack.FoaasRatpackServerBuilder
-import org.ratpackframework.groovy.launch.RatpackMain
-import org.ratpackframework.launch.LaunchConfig
-import org.ratpackframework.launch.LaunchConfigFactory
-import org.ratpackframework.server.RatpackServer
+import ratpack.launch.LaunchConfig
+import ratpack.launch.LaunchConfigFactory
+import ratpack.launch.RatpackMain
+import ratpack.server.RatpackServer
 /**
  * User: danielwoods
  * Date: 9/25/13

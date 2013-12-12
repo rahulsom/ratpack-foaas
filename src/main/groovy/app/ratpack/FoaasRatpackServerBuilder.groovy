@@ -2,13 +2,13 @@ package app.ratpack
 
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.socket.SocketChannel
-import org.ratpackframework.handling.Handler
-import org.ratpackframework.launch.HandlerFactory
-import org.ratpackframework.launch.LaunchConfig
-import org.ratpackframework.launch.LaunchException
-import org.ratpackframework.server.RatpackServer
-import org.ratpackframework.server.internal.NettyRatpackService
-import org.ratpackframework.server.internal.ServiceBackedServer
+import ratpack.handling.Handler
+import ratpack.launch.HandlerFactory
+import ratpack.launch.LaunchConfig
+import ratpack.launch.LaunchException
+import ratpack.server.RatpackServer
+import ratpack.server.internal.NettyRatpackService
+import ratpack.server.internal.ServiceBackedServer
 /**
  * User: danielwoods
  * Date: 9/25/13
