@@ -5,24 +5,35 @@ import ratpack.groovy.handling.GroovyContext
 import ratpack.groovy.render.GroovyRendererSupport
 import ratpack.jackson.Jackson
 
-import static app.FoaasWebSocketBroadcaster._ as BROADCASTER
+import javax.inject.Inject
+
+import static FoaasBroadcaster._ as BROADCASTER
 import static ratpack.groovy.Groovy.groovyTemplate
 import static ratpack.groovy.Groovy.markupBuilder
 
 class FuckOffRenderer extends GroovyRendererSupport<FuckOff> {
 
+  private final ObjectWriter objectWriter;
+  private final FoaasBroadcaster broadcaster;
+
+  @Inject
+  FuckOffRenderer(ObjectWriter objectWriter, FoaasBroadcaster broadcaster) {
+    this.objectWriter = objectWriter
+    this.broadcaster = broadcaster
+  }
+
   @Override
   void render(GroovyContext context, FuckOff f) throws Exception {
-    // Send out websocket message
 
-    BROADCASTER.broadcast context.get(ObjectWriter).writeValueAsString(f)
+    def jsonString = objectWriter.writeValueAsString(f)
+    broadcaster.broadcast(jsonString)
 
     context.byContent {
       plainText {
         render "$f.message $f.subtitle"
       }
       json {
-        render Jackson.json(f)
+        response.send "application/json", jsonString
       }
       xml {
         render markupBuilder("application/xml", "UTF-8") {
