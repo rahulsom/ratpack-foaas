@@ -26,4 +26,4 @@ Credits
 ---
 
 The majority of the credits go to me, [Dan Woods](http://twitter.com/danveloper) for my tireless work on implementing this platform in Ratpack. However, some credit must go to [Craig Burke](http://twitter.com/craigburke1) for his work on developing the properties file that powers the engine at the core of this platform. Additional credits must go to [Dionysus](http://twitter.com/foaas) for their work on developing the initial platform specification, which is homed at http://www.foaas.com.  
- 
+  
