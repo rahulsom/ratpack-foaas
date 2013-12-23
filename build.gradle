@@ -37,8 +37,15 @@ dependencies {
   compile "com.itextpdf:itextpdf:5.4.2"
   runtime 'org.bouncycastle:bcprov-jdk15on:1.49'
   compile 'commons-httpclient:commons-httpclient:3.1'
-	testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+  testCompile "org.spockframework:spock-core:0.7-groovy-2.0", {
+      exclude module: "groovy-all"
+  }
+  testCompile 'org.java-websocket:Java-WebSocket:1.3.0'
 }
+
+// The Groovy that rest-assured drags in via ratpack-groovy-test is toxic, prevent it from coming in
+// This should be fixed upstream in Ratpack
+configurations.testCompile.dependencies.find { it.name == "ratpack-groovy-test" }.exclude(group: "org.codehaus.groovy")
 
 apply plugin: "idea"
 
