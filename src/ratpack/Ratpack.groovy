@@ -3,6 +3,7 @@ import app.FoaasModule
 import app.FuckOff
 import app.FuckOffService
 import ratpack.exec.Blocking
+import ratpack.form.Form
 import ratpack.groovy.template.TextTemplateModule
 
 import static ratpack.groovy.Groovy.ratpack
@@ -33,7 +34,7 @@ ratpack {
       render file("public/stream.html")
     }
 
-    path("ws") { FoaasBroadcaster broadcaster ->
+    get("ws") { FoaasBroadcaster broadcaster ->
       context.websocket { ws ->
         broadcaster.register {
           ws.send(it)
@@ -42,6 +43,17 @@ ratpack {
         it.onClose {
           it.openResult.close()
         }
+      }
+    }
+
+    post("slack") {
+      parse(Form).map { form ->
+        def commandText = form.get("text").split(" ")
+        def fromUser = form.get("user_name")
+
+        service.get(commandText[0], fromUser, commandText.size() > 1 ? commandText[1] : "")
+      } then { fo ->
+        render fo.message
       }
     }
 
