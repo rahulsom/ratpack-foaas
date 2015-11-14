@@ -53,7 +53,7 @@ ratpack {
 
         service.get(commandText[0], fromUser, commandText.size() > 1 ? commandText[1] : "")
       } then { fo ->
-        response.send "application/json", """{"response_type": "in_channel", "text": "${fo.message}"}"""
+        response.send "application/json", """{"response_type": "in_channel", "text": "${fo.message}\n${fo.subtitle}"}"""
       }
     }
 
