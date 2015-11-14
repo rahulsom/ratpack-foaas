@@ -18,6 +18,7 @@ class FoaasModule extends AbstractModule {
       properties.load(it)
     }
 
+    bind(FoaasBroadcaster)
     bind(FuckOffService).toInstance(new FuckOffService(properties, new SimpleTemplateEngine()))
     bind(FuckOffRenderer)
   }

@@ -1,6 +1,6 @@
 package app
 
-import ratpack.util.Action
+import ratpack.func.Action
 
 import java.util.concurrent.CopyOnWriteArrayList
 

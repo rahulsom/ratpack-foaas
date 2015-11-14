@@ -13,14 +13,14 @@ class WebSocketsSpec extends FunctionalSpec {
 
     def "fucks are broadcast via websockets"() {
         when:
-        def uri = new URI(aut.address.toString() + "ws")
+        def uri = new URI(app.address.toString() + "ws")
         def wsClient = new RecordingWebSocketClient(uri)
         wsClient.connectBlocking()
 
         then:
         with(get("off/to/from")) {
-            contentType == "text/plain;charset=UTF-8"
-            body.asString().contains "Fuck off, to."
+            headers["content-type"] == "text/plain;charset=UTF-8"
+            body.text.contains "Fuck off, to."
         }
 
 

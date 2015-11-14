@@ -1,42 +1,40 @@
 package app
 
-import com.fasterxml.jackson.databind.ObjectWriter
+import com.fasterxml.jackson.databind.ObjectMapper
 import ratpack.groovy.handling.GroovyContext
 import ratpack.groovy.render.GroovyRendererSupport
-import ratpack.jackson.Jackson
 
 import javax.inject.Inject
 
-import static FoaasBroadcaster._ as BROADCASTER
 import static ratpack.groovy.Groovy.groovyTemplate
 import static ratpack.groovy.Groovy.markupBuilder
 
 class FuckOffRenderer extends GroovyRendererSupport<FuckOff> {
 
-  private final ObjectWriter objectWriter;
+  private final ObjectMapper objectMapper;
   private final FoaasBroadcaster broadcaster;
 
   @Inject
-  FuckOffRenderer(ObjectWriter objectWriter, FoaasBroadcaster broadcaster) {
-    this.objectWriter = objectWriter
+  FuckOffRenderer(ObjectMapper objectMapper, FoaasBroadcaster broadcaster) {
+    this.objectMapper = objectMapper
     this.broadcaster = broadcaster
   }
 
   @Override
   void render(GroovyContext context, FuckOff f) throws Exception {
 
-    def jsonString = objectWriter.writeValueAsString(f)
+    def jsonString = objectMapper.writeValueAsString(f)
     broadcaster.broadcast(jsonString)
 
     context.byContent {
       plainText {
-        render "$f.message $f.subtitle"
+        context.response.send "text/plain;charset=UTF-8", "$f.message $f.subtitle"
       }
       json {
-        response.send "application/json", jsonString
+        context.response.send "application/json", jsonString
       }
       xml {
-        render markupBuilder("application/xml", "UTF-8") {
+        context.render markupBuilder("application/xml", "UTF-8") {
           fuckoff {
             message f.message
             subtitle f.subtitle
@@ -44,10 +42,10 @@ class FuckOffRenderer extends GroovyRendererSupport<FuckOff> {
         }
       }
       html {
-        render groovyTemplate("fuckoff.html", f: f)
+        context.render groovyTemplate("fuckoff.html", f: f, "text/html;charset=UTF-8")
       }
       type("application/pdf") {
-        response.send "application/pdf", f.toPdf()
+        context.response.send "application/pdf", f.toPdf()
       }
     }
   }

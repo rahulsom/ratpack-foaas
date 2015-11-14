@@ -1,10 +1,14 @@
 package app
 
+import groovy.json.JsonSlurper
+
 class ApiSpec extends FunctionalSpec {
 
     def "content negotiation"() {
         when:
-        request.header("Accept", "*/*")
+        requestSpec {
+            it.headers.add("Accept", "*/*")
+        }
 
         then:
         getText("off/to/from") == "Fuck off, to. - from"
@@ -12,34 +16,41 @@ class ApiSpec extends FunctionalSpec {
 
     def "Content Negotiation JSON"() {
         when:
-        request.header("Accept", "application/json")
+        requestSpec {
+            it.headers.add("Accept", "application/json")
+        }
 
         then:
-        with(get("off/to/from").jsonPath()) {
-            get("message") == "Fuck off, to."
-            get("subtitle") == "- from"
+        def responseJson = new JsonSlurper().parseText(get("off/to/from").body.text)
+        with(responseJson) {
+            message == "Fuck off, to."
+            subtitle == "- from"
         }
     }
 
     def "Content Negotiation text/HTML"() {
         when:
-        request.header("Accept", "text/html")
+        requestSpec {
+            it.headers.add("Accept", "text/html")
+        }
 
         then:
         with(get("off/to/from")) {
-            contentType == "text/html;charset=UTF-8"
-            body.asString().contains "Fuck off, to."
+            headers["content-type"] == "text/html;charset=UTF-8"
+            body.text.contains "Fuck off, to."
         }
     }
 
     def "Content Negotiation pdf"() {
         when:
-        request.header("Accept", "application/pdf")
+        requestSpec {
+            it.headers.add("Accept", "application/pdf")
+        }
 
         then:
         with(get("off/to/from")) {
-            contentType == "application/pdf"
-            body.asString().startsWith "%PDF"
+            headers["content-type"] == "application/pdf"
+            body.text.startsWith "%PDF"
         }
     }
 
@@ -53,17 +64,21 @@ class ApiSpec extends FunctionalSpec {
 
     def "pathtokens are properly encoded"() {
         when:
-        request.header("Accept", "text/html")
+        requestSpec {
+            it.headers.add("Accept", "text/html")
+        }
 
         then:
         with(get("blink182/generation/fucking%20heart")) {
-            !body.asString().contains("%20")
+            !body.text.contains("%20")
         }
     }
 
     def "variant text is produced by #path"() {
         when:
-        request.header("Accept", "*/*")
+        requestSpec {
+            it.headers.add("Accept", "*/*")
+        }
 
         then:
         getText(path) == expectedText
@@ -79,5 +94,4 @@ class ApiSpec extends FunctionalSpec {
         "ceccoangiolieri/to/from" | "to, s'i' so' buon begolardo, - tu me ne tien' ben la lancia a le reni; - s'i' desno con altrui, e tu vi ceni; - s'io mordo 'l grasso, e tu vi sughi el lardo; - s'io cimo 'l panno, e tu vi freghi el cardo. - from"
         "boehner/from"            | "While thousands of programs and employees were deemed \"non-essential\" and suspended or furloughed, one of the few government costs deemed essential to maintain during the  shutdown has been the Congressional gym. Oh no, please, don't get out of the pool, Mr. Boehner. This fuck you is waterproof. - from"
     }
-
 }
