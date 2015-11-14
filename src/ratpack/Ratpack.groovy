@@ -60,7 +60,7 @@ ratpack {
     get(":type/:p1/:p2?") {
       def (String to, String from, String type) = betterPathTokens
       def f = service.get(type, from, to)
-      f ? render(f) : clientError(404)
+      f ? render(f) : notFound()
     }
 
     prefix("mp3") {
