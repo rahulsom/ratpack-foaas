@@ -11,11 +11,11 @@ class FuckOffService {
 
   FuckOffService(Properties messages, SimpleTemplateEngine templateEngine) {
     this.templateEngine = templateEngine
-    Map m = messages.keySet().collect{it.split('\\.').reverse() as Stack}.inject([:]) {m,v->c v,m;m}
-    messages.each {k,v->Eval.x m,"x.$k='${v.replaceAll("'", "\\\\'")}'"}
+    Map m = messages.keySet().collect { it.split('\\.').reverse() as Stack }.inject([:]) { m, v -> c v, m; m }
+    messages.each { k, v -> Eval.x m, "x.$k='${v.replaceAll("'", "\\\\'")}'" }
     m.fuckOff.each { String key, Map value ->
       def (msg, subtitle, uri) = destructure(key, value)
-      def exampleFuckOff = new FuckOff(render (msg, EXAMPLE_PARAMS), render (subtitle, EXAMPLE_PARAMS))
+      def exampleFuckOff = new FuckOff(render(msg, EXAMPLE_PARAMS), render(subtitle, EXAMPLE_PARAMS))
       def exampleUri = render(uri, EXAMPLE_PARAMS)
       this.foaasResources."$key" = [uri, msg, subtitle, exampleUri, exampleFuckOff] as FuckOffApiResource
     }
@@ -24,7 +24,7 @@ class FuckOffService {
   static final def c = { Stack stack, Map last ->
     def key = stack.pop()
     if (!last[key]) last[key] = [:]
-    last = (Map)last[key]
+    last = (Map) last[key]
     if (stack) FuckOffService.c stack, last
   }
 

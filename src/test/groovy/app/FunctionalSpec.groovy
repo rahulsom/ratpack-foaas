@@ -12,24 +12,24 @@ import spock.lang.Unroll
 @Unroll
 class FunctionalSpec extends Specification {
 
-    @Shared
-    @AutoCleanup
-    ApplicationUnderTest app = new CloseableApplicationUnderTest() {
-        CloseableApplicationUnderTest app
+  @Shared
+  @AutoCleanup
+  ApplicationUnderTest app = new CloseableApplicationUnderTest() {
+    CloseableApplicationUnderTest app
 
-        @Override
-        void close() {
-            app?.close()
-        }
-
-        @Override
-        URI getAddress() {
-            if (app == null) {
-                app = new GroovyRatpackMainApplicationUnderTest()
-            }
-            app.address
-        }
+    @Override
+    void close() {
+      app?.close()
     }
+
+    @Override
+    URI getAddress() {
+      if (app == null) {
+        app = new GroovyRatpackMainApplicationUnderTest()
+      }
+      app.address
+    }
+  }
 
   @Delegate
   TestHttpClient client = app.httpClient

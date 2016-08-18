@@ -2,11 +2,11 @@ package app
 
 class SlackSpec extends FunctionalSpec {
 
-    def "slack integration"() {
-        given:
-        requestSpec {
-            it.body.type('application/x-www-form-urlencoded')
-            it.body.text("""
+  def "slack integration"() {
+    given:
+    requestSpec {
+      it.body.type('application/x-www-form-urlencoded')
+      it.body.text("""
 token=gIkuvaNzQIHg97ATvDxqgjtO&
 team_id=T0001&
 team_domain=example&
@@ -18,11 +18,11 @@ command=/foaas&
 text=steviewonder bob&
 response_url=https://hooks.slack.com/commands/1234/5678
 """)
-        }
-
-        expect:
-        postText("slack") == '{"response_type": "in_channel", "text": "I just called, to say..........bob FUCK OFF!\n- Steve"}'
     }
+
+    expect:
+    postText("slack") == '{"response_type": "in_channel", "text": "I just called, to say..........bob FUCK OFF!\n- Steve"}'
+  }
 
 }
 

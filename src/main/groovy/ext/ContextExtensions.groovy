@@ -8,7 +8,6 @@ import ratpack.handling.Context
  * Date: 8/7/13
  */
 class ContextExtensions {
-
   static DestructurablePathTokens getBetterPathTokens(Context context) {
     new DestructurablePathTokens(context.pathTokens)
   }
