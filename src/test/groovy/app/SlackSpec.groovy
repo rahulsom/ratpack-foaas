@@ -21,7 +21,7 @@ response_url=https://hooks.slack.com/commands/1234/5678
     }
 
     expect:
-    postText("slack") == '{"response_type": "in_channel", "text": "I just called, to say..........bob FUCK OFF!\n- Steve"}'
+    postText("slack") == '{"response_type":"in_channel","text":"I just called, to say..........bob FUCK OFF!\\n- Steve"}'
   }
 
 }
