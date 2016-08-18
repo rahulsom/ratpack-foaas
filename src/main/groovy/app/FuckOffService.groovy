@@ -15,7 +15,9 @@ class FuckOffService {
     messages.each {k,v->Eval.x m,"x.$k='${v.replaceAll("'", "\\\\'")}'"}
     m.fuckOff.each { String key, Map value ->
       def (msg, subtitle, uri) = destructure(key, value)
-      this.foaasResources."$key" = [uri, msg, subtitle, render(uri, EXAMPLE_PARAMS), [msg, subtitle] as FuckOff] as FuckOffApiResource
+      def exampleFuckOff = new FuckOff(render (msg, EXAMPLE_PARAMS), render (subtitle, EXAMPLE_PARAMS))
+      def exampleUri = render(uri, EXAMPLE_PARAMS)
+      this.foaasResources."$key" = [uri, msg, subtitle, exampleUri, exampleFuckOff] as FuckOffApiResource
     }
   }
 
